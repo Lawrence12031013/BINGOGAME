@@ -7,6 +7,7 @@ let gameNumber = parseInt(y);
 // array with generated numbers;
 let resultsArray = [];
 // function to draw numbers and place them as a divs in DOM;
+
 function lotteryNumbers() {
   // check length of result array;
   if (resultsArray.length === gameTimes) {
@@ -16,11 +17,11 @@ function lotteryNumbers() {
   // draw lottery numbers between 1 and gameNumber;
   let drawResult = Math.floor(Math.random() * gameNumber + 1);
   // check if drawResult exist in resultsArray. For first run the array is empty;
-  /*for (let i = 0; i < resultsArray.length; i++) {
+  for (let i = 0; i < resultsArray.length; i++) {
     if (drawResult === resultsArray[i]) {
       return lotteryNumbers;
     }
-  }*/
+  }
   // create div element with class = balls and generated number as a text;
   const div = document.createElement("div");
   div.classList.add("balls");
@@ -61,7 +62,7 @@ function modalActive() {
 
 // function to reset container for numbers if the lottery has been finished (6 numbers drawed) if not then show message to finish lottery;
 function resetContainer() {
-  if (resultsArray.length < 6) {
+  if (resultsArray.length < 1) {
     // call function to show modal;
     modalActive();
   } else {
