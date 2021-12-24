@@ -1,6 +1,4 @@
-// set gametimes
-let x = prompt("請輸入開獎次數");
-let gameTimes = parseInt(x);
+
 // set the max number
 let y = prompt("請輸入賓果最大數值");
 let gameNumber = parseInt(y);
@@ -10,7 +8,7 @@ let resultsArray = [];
 
 function lotteryNumbers() {
   // check length of result array;
-  if (resultsArray.length === gameTimes) {
+  if (resultsArray.length === gameNumber) {
     // if it's equal to gameTimes, then stop function;
     return;
   }
@@ -23,17 +21,36 @@ function lotteryNumbers() {
     }
   }
   // create div element with class = balls and generated number as a text;
-  const div = document.createElement("div");
-  div.classList.add("balls");
-  div.textContent = drawResult;
+  let number = document.createElement("p");
+  number.classList.add("balls");
+  number.innerText = drawResult;
   // put lottery number into resultsArray;
   resultsArray.push(drawResult);
 
   // place div with lottery number in right place in body;
   const numbersContainer = document.getElementById("container");
 
-  numbersContainer.appendChild(div);
+  numbersContainer.appendChild(number);
+
+  numbersContainer.addEventListener("animationend", function(){
+    number.style.display = "none";
+  })
+
+  //set animation appear after animation
+  setTimeout(() => {
+    
+  // create the numberlist on left
+  let numberBox = document.createElement("div");
+  numberBox.classList.add("ballBox");
+  numberBox.innerText = drawResult;
+
+  const ballBoxShell = document.getElementById("numberbox");
+  ballBoxShell.appendChild(numberBox);
+  
+  }, 1500);
+  
 }
+
 
 // hide modal function;
 function hideModal(el) {
@@ -68,9 +85,11 @@ function resetContainer() {
   } else {
     const container = document.getElementById("container");
     container.innerHTML = "";
+    const numberBox = document.getElementById("numberbox");
+    numberBox.innerHTML = "";
     resultsArray = [];
     //        clickListener();
-  }
+  }  
 }
 
 // reset container when Reset Numbers button has been clicked;
